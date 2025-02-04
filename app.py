@@ -4,6 +4,12 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelEncoder
 import pickle
 import os
+from dotenv import load_dotenv
+
+
+
+  # Load environment variables from .env
+
 
 app = Flask(__name__, static_folder='static')
 app.config['UPLOAD_FOLDER'] = 'uploads'
@@ -15,6 +21,8 @@ os.makedirs(app.config['RESULTS_FOLDER'], exist_ok=True)
 model_file_path = 'random_forest_model.pkl'
 with open(model_file_path, 'rb') as file:
     model = pickle.load(file)
+
+load_dotenv()
 
 # Load the label encoders from .pkl files
 with open('label_encoder_source.pkl', 'rb') as file:
