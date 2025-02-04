@@ -12,7 +12,7 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 os.makedirs(app.config['RESULTS_FOLDER'], exist_ok=True)
 
 # Load the trained model from the .pkl file
-model_file_path = 'C:/Users/mohan/Desktop/EL/CN_EL/cn/random_forest_model.pkl'
+model_file_path = 'random_forest_model.pkl'
 with open(model_file_path, 'rb') as file:
     model = pickle.load(file)
 
@@ -24,7 +24,7 @@ with open('label_encoder_destination.pkl', 'rb') as file:
     le_destination = pickle.load(file)
 
 # Load the dataset
-file_path = 'C:/Users/mohan/Desktop/EL/CN_EL/cn/data.csv'
+file_path = 'data.csv'
 data = pd.read_csv(file_path)
 
 # Drop unnecessary columns
@@ -93,7 +93,7 @@ def upload_file():
         filtered_data['Predicted_Protocol'] = le_protocol.inverse_transform(predicted_class[filtered_indices].astype(int))
         filtered_data['Max_Probability'] = max_probabilities[filtered_indices]
  
-        output_file_path = 'C:/Users/mohan/Desktop/EL/CN_EL/cn/predicted_data.csv'
+        output_file_path = 'results/predicted_data.csv'
         filtered_data.to_csv(output_file_path, index=False)
         
         table_html = filtered_data.to_html(classes='table table-striped', index=False)
